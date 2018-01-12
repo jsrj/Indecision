@@ -1,0 +1,16 @@
+{
+  "name": "indecision-app",
+  "version": "1.0.0",
+  "description": "React decision maker",
+  "main": "index.js",
+  "repository": "https://github.com/jsrj/Indecision.git",
+  "author": "Robert Jones (jsrj)",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1"
+  },
+  "scripts" : {
+    "compile-app": "babel src/app.jsx --out-file=Public/Scripts/app.js --presets=env,react"
+  }
+}
