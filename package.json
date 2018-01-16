@@ -11,6 +11,7 @@
     "babel-preset-react": "^6.24.1"
   },
   "scripts" : {
-    "compile-jsx": "babel src/app.jsx --out-file=Public/Scripts/app.js --presets=env,react --watch"
+    "compile-jsx": "babel src/app.jsx --out-file=Public/Scripts/app.js --presets=env,react --watch",
+    "start" :      "live-server 8080 public"
   }
 }
