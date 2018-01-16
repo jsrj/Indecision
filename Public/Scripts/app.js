@@ -2,12 +2,16 @@
 
 console.log('app.js is running.');
 
+var appRoot = document.getElementById('react-template-target');
+var userRoot = document.getElementById('user');
+var cntrRoot = document.getElementById('counter');
+
 // JSX
 
 var app = {
     title: 'Indecision',
     subtitle: 'Make tricky decisions with the help of ReactJS!',
-    options: ['One thing', 'two thing', 'red thing', 'blue thing']
+    options: []
 };
 var user = {
     fullName: 'Foo Bar',
@@ -41,40 +45,107 @@ var getLastName = function getLastName(fullName) {
 };
 
 console.log('First Name: ' + getFirstName(user.fullName) + ', Last Name: ' + getLastName(user.fullName));
+var onFormSubmit = function onFormSubmit(event) {
+    event.preventDefault();
 
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        { className: 'head', id: 'jsx-h1' },
-        app.title
-    ),
-    React.createElement('br', null),
-    app.subtitle && React.createElement(
-        'span',
+    // Holds whatever value was placed inside the element with the name 'option', which is the input field in this case.
+    var option = event.target.elements.option.value;
+    if (option && option != '') {
+        app.options.push(option);
+    }
+    event.target.elements.option.value = '';
+    console.log(app.options);
+
+    render();
+};
+var render = function render() {
+    var template = React.createElement(
+        'div',
         null,
-        app.subtitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        app.options.length > 0 ? 'Here are your options:' : 'There are no options.'
-    )
-);
-var count = 0;
-var addOne = function addOne() {
-    count++;
-    render2();
+        React.createElement(
+            'h1',
+            { className: 'head', id: 'jsx-h1' },
+            app.title
+        ),
+        React.createElement('br', null),
+        app.subtitle && React.createElement(
+            'span',
+            null,
+            app.subtitle
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length > 0 ? 'Here are your options:' : 'There are no options.'
+        ),
+        app.options.length > 0 && React.createElement(
+            'ol',
+            null,
+            app.options.length > 0 && React.createElement(
+                'li',
+                null,
+                ' ',
+                app.options[0]
+            ),
+            app.options.length > 1 && React.createElement(
+                'li',
+                null,
+                ' ',
+                app.options[1]
+            ),
+            app.options.length > 2 && React.createElement(
+                'li',
+                null,
+                ' ',
+                app.options[2]
+            ),
+            app.options.length > 3 && React.createElement(
+                'li',
+                null,
+                ' ',
+                app.options[3]
+            )
+        ),
+        React.createElement(
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement(
+                'label',
+                { htmlFor: 'option' },
+                'Option:'
+            ),
+            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement(
+                'button',
+                { type: 'submit' },
+                'Add Option'
+            )
+        )
+    );
+
+    ReactDOM.render(template, appRoot);
 };
-var subOne = function subOne() {
-    count--;
-    render2();
-};
-var resetCount = function resetCount() {
-    count = 0;
-    render2();
-};
+// const template = (
+//     <div>
+//         <h1 className="head" id="jsx-h1">{app.title}</h1>
+//         <br />
+//         {(app.subtitle) && <span>{app.subtitle}</span>}
+//         <p>{app.options.length > 0 ? 'Here are your options:' : 'There are no options.'}</p>
+//         { app.options.length > 0 &&
+//             <ol>
+//                 <li>{app.options.length > 0 && app.options[0]}</li>
+//                 <li>{app.options.length > 1 && app.options[1]}</li>
+//                 <li>{app.options.length > 2 && app.options[2]}</li>
+//                 <li>{app.options.length > 3 && app.options[3]}</li>
+//             </ol>
+//     }
+//         <form onSubmit={onFormSubmit}>
+//             <label htmlFor="option">Option:</label>
+//             <input type="text" name="option" />
+//             <button type="submit">Add Option</button>
+//         </form>
+//     </div>
+// );
 
 var userInfo = React.createElement(
     'div',
@@ -88,40 +159,5 @@ var userInfo = React.createElement(
     getUserLocation(user.location)
 );
 
-var appRoot = document.getElementById('react-template-target');
-var userRoot = document.getElementById('user');
-var cntrRoot = document.getElementById('counter');
-
-var render2 = function render2() {
-    var templateTwo = React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'h2',
-            null,
-            'Count:\xA0',
-            count
-        ),
-        React.createElement(
-            'button',
-            { onClick: addOne },
-            '+1'
-        ),
-        React.createElement(
-            'button',
-            { onClick: subOne },
-            '-1'
-        ),
-        '\xA0 \xA0',
-        React.createElement(
-            'button',
-            { onClick: resetCount },
-            'CE'
-        )
-    );
-    ReactDOM.render(templateTwo, cntrRoot);
-};
-
-ReactDOM.render(template, appRoot);
 ReactDOM.render(userInfo, userRoot);
-render2();
+render();
