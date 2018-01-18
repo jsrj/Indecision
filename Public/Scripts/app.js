@@ -45,6 +45,7 @@ var getLastName = function getLastName(fullName) {
 };
 
 console.log('First Name: ' + getFirstName(user.fullName) + ', Last Name: ' + getLastName(user.fullName));
+
 var onFormSubmit = function onFormSubmit(event) {
     event.preventDefault();
 
@@ -58,6 +59,12 @@ var onFormSubmit = function onFormSubmit(event) {
 
     render();
 };
+var clearItems = function clearItems(event) {
+    event.preventDefault();
+    app.options = [];
+    render();
+};
+
 var render = function render() {
     var template = React.createElement(
         'div',
@@ -76,7 +83,7 @@ var render = function render() {
         React.createElement(
             'p',
             null,
-            app.options.length > 0 ? 'Here are your options:' : 'There are no options.'
+            app.options.length > 0 ? 'You have ' + app.options.length + ' option' + (app.options.length > 1 ? 's' : '') + ':' : 'There are no options.'
         ),
         app.options.length > 0 && React.createElement(
             'ol',
@@ -120,6 +127,12 @@ var render = function render() {
                 { type: 'submit' },
                 'Add Option'
             )
+        ),
+        React.createElement('br', null),
+        React.createElement(
+            'button',
+            { type: 'submit', onClick: clearItems },
+            'Remove All'
         )
     );
 

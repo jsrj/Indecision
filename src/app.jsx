@@ -29,6 +29,8 @@ const getFirstName = (fullName) => fullName.split(' ')[0];
 const getLastName  = (fullName) => fullName.split(' ')[1];
 
 console.log(`First Name: ${getFirstName(user.fullName)}, Last Name: ${getLastName(user.fullName)}`);
+
+
 const onFormSubmit = (event) => {
     event.preventDefault();
 
@@ -42,13 +44,19 @@ const onFormSubmit = (event) => {
 
     render();
 }
+const clearItems = (event) => {
+    event.preventDefault();
+    app.options = [];
+    render();
+}
+
 const render = () => {
     const template = (
         <div>
             <h1 className="head" id="jsx-h1">{app.title}</h1>
             <br />
             {(app.subtitle) && <span>{app.subtitle}</span>}
-            <p>{app.options.length > 0 ? 'Here are your options:' : 'There are no options.'}</p>
+            <p>{app.options.length > 0 ? `You have ${app.options.length} option${(app.options.length > 1)?'s':''}:` : 'There are no options.'}</p>
             { app.options.length > 0 &&
                 <ol>
                     {app.options.length > 0 && <li> {app.options[0]}</li>}
@@ -62,6 +70,8 @@ const render = () => {
                 <input type="text" name="option" />
                 <button type="submit">Add Option</button>
             </form>
+            <br />
+            <button type="submit" onClick={clearItems}>Remove All</button>
         </div>
     );
 
