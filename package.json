@@ -14,6 +14,7 @@
     "compile-jsx": "babel src/app.jsx --out-file=Public/Scripts/app.js --presets=env,react --watch",
     "live" :      "live-server 8080 public",
     "start": "http-server Public/",
-    "push":  "git push origin master -f && git push heroku master"
+    "push":  "git push origin master -f && git push heroku master",
+    "build": ""
   }
 }
