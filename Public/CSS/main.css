@@ -1,0 +1,34 @@
+.add-option {
+  bottom: 1px;
+}
+
+.add-option .label {
+  width: 100%;
+  display: block !important;
+  margin-top: 5vh !important;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.add-option .option {
+  display: inline-block !important;
+  border-radius: 0px !important;
+}
+
+.add-option .options-button {
+  height: 6vh;
+  display: inline-block;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.add-option .remove {
+  position: relative !important;
+  float: right !important;
+  margin: 0px;
+}
+
+#react-template-target {
+  margin: 0 auto;
+  width: 50vw;
+}

@@ -52,7 +52,11 @@ var onFormSubmit = function onFormSubmit(event) {
     // Holds whatever value was placed inside the element with the name 'option', which is the input field in this case.
     var option = event.target.elements.option.value;
     if (option && option != '') {
-        app.options.push(option);
+        app.options.push(React.createElement(
+            'li',
+            { key: '' + (app.options.length - 1), className: 'ui segment' },
+            option
+        ));
     }
     event.target.elements.option.value = '';
     console.log(app.options);
@@ -86,79 +90,34 @@ var render = function render() {
             app.options.length > 0 ? 'You have ' + app.options.length + ' option' + (app.options.length > 1 ? 's' : '') + ':' : 'There are no options.'
         ),
         app.options.length > 0 && React.createElement(
-            'ol',
-            null,
-            app.options.length > 0 && React.createElement(
-                'li',
-                null,
-                ' ',
-                app.options[0]
-            ),
-            app.options.length > 1 && React.createElement(
-                'li',
-                null,
-                ' ',
-                app.options[1]
-            ),
-            app.options.length > 2 && React.createElement(
-                'li',
-                null,
-                ' ',
-                app.options[2]
-            ),
-            app.options.length > 3 && React.createElement(
-                'li',
-                null,
-                ' ',
-                app.options[3]
-            )
+            'ul',
+            { className: 'ui segments' },
+            app.options
         ),
         React.createElement(
             'form',
-            { onSubmit: onFormSubmit },
+            { onSubmit: onFormSubmit, className: 'ui form add-option' },
             React.createElement(
                 'label',
-                { htmlFor: 'option' },
+                { htmlFor: 'option', className: 'ui label' },
                 'Option:'
             ),
-            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement('input', { type: 'text', name: 'option', 'class': 'ui input option' }),
             React.createElement(
                 'button',
-                { type: 'submit' },
+                { type: 'submit', className: 'ui blue button options-button' },
                 'Add Option'
+            ),
+            React.createElement(
+                'button',
+                { type: 'submit', onClick: clearItems, className: 'ui red button options-button remove' },
+                'Remove All'
             )
-        ),
-        React.createElement('br', null),
-        React.createElement(
-            'button',
-            { type: 'submit', onClick: clearItems },
-            'Remove All'
         )
     );
 
     ReactDOM.render(template, appRoot);
 };
-// const template = (
-//     <div>
-//         <h1 className="head" id="jsx-h1">{app.title}</h1>
-//         <br />
-//         {(app.subtitle) && <span>{app.subtitle}</span>}
-//         <p>{app.options.length > 0 ? 'Here are your options:' : 'There are no options.'}</p>
-//         { app.options.length > 0 &&
-//             <ol>
-//                 <li>{app.options.length > 0 && app.options[0]}</li>
-//                 <li>{app.options.length > 1 && app.options[1]}</li>
-//                 <li>{app.options.length > 2 && app.options[2]}</li>
-//                 <li>{app.options.length > 3 && app.options[3]}</li>
-//             </ol>
-//     }
-//         <form onSubmit={onFormSubmit}>
-//             <label htmlFor="option">Option:</label>
-//             <input type="text" name="option" />
-//             <button type="submit">Add Option</button>
-//         </form>
-//     </div>
-// );
 
 var userInfo = React.createElement(
     'div',
