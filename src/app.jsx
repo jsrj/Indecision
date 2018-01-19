@@ -1,8 +1,9 @@
 console.log('app.js is running.')
 
-const appRoot   = document.getElementById('react-template-target');
-const userRoot  = document.getElementById('user');
-const cntrRoot  = document.getElementById('counter');
+const appRoot       = document.getElementById('react-template-target');
+const userRoot      = document.getElementById('user');
+const cntrRoot      = document.getElementById('counter');
+const decisionModal = document.getElementById('decision-modal');
 
 // JSX
 
@@ -50,14 +51,11 @@ const removeOne = (index) => {
     app.options[index] = null;
     render();
 }
-
 const makeDecision = () => {
-    let maxInRange = app.options.length-1;
-    let minInRange = 0;
-    let choice = Math.floor(Math.random()*(maxInRange-minInRange)+maxInRange);
+    let maxInRange = app.options.length;
+    let choice = Math.floor(Math.random()*maxInRange);
     choice = (choice < 0 || choice == undefined) ? 0 : choice;
-    console.log(`choice: ${app.options[choice]}`);
-    //clearItems();
+    alert(app.options[choice]);
 }
 
 const render = () => {
@@ -72,9 +70,9 @@ const render = () => {
                 <label htmlFor="option" className="ui label">{app.options.length > 0 ? `You have ${app.options.length} option${(app.options.length > 1)?'s':''}:` : 'Enter an option:'}</label>
                 <input type="text" name="option" className="ui input option" />
             </form>
-            
+
             <div className="buttons-container">
-                <button type="none" click="makeDecision" className="ui button make-decision">What Should I Do?</button>
+                <button type="none" onClick={makeDecision} className="ui button make-decision">What Should I Do?</button>
                 <div className="add-remove-container">
                     <button type="submit" className="ui blue button options-button">Add Option</button>
                     <button type="submit" onClick={clearItems} className="ui red button remove">Remove All</button>

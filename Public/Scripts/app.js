@@ -5,6 +5,7 @@ console.log('app.js is running.');
 var appRoot = document.getElementById('react-template-target');
 var userRoot = document.getElementById('user');
 var cntrRoot = document.getElementById('counter');
+var decisionModal = document.getElementById('decision-modal');
 
 // JSX
 
@@ -64,14 +65,11 @@ var removeOne = function removeOne(index) {
     app.options[index] = null;
     render();
 };
-
 var makeDecision = function makeDecision() {
-    var maxInRange = app.options.length - 1;
-    var minInRange = 0;
-    var choice = Math.floor(Math.random() * (maxInRange - minInRange) + maxInRange);
+    var maxInRange = app.options.length;
+    var choice = Math.floor(Math.random() * maxInRange);
     choice = choice < 0 || choice == undefined ? 0 : choice;
-    console.log('choice: ' + app.options[choice]);
-    //clearItems();
+    alert(app.options[choice]);
 };
 
 var render = function render() {
@@ -109,7 +107,7 @@ var render = function render() {
             { className: 'buttons-container' },
             React.createElement(
                 'button',
-                { type: 'none', click: 'makeDecision', className: 'ui button make-decision' },
+                { type: 'none', onClick: makeDecision, className: 'ui button make-decision' },
                 'What Should I Do?'
             ),
             React.createElement(
