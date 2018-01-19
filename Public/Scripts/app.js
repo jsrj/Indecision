@@ -52,12 +52,16 @@ var onFormSubmit = function onFormSubmit(event) {
     // Holds whatever value was placed inside the element with the name 'option', which is the input field in this case.
     var option = event.target.elements.option.value;
     if (option && option != '') {
-        app.options.push(React.createElement(
-            'li',
-            { key: '' + (app.options.length - 1), className: 'ui segment' },
-            option
-        ));
+        app.options.push(option);
     }
+    // {app.options.map((option) => {
+    //     if (option != RegExp((<li></li>)\W)) {
+    //         option = <li key={`${(app.options.length-1)}`} className="ui segment">{option}</li>
+    //     } else {
+    //         option = option
+    //     }
+    // })}
+
     event.target.elements.option.value = '';
     console.log(app.options);
 
@@ -68,8 +72,13 @@ var clearItems = function clearItems(event) {
     app.options = [];
     render();
 };
+var removeOne = function removeOne(index) {
+    app.options[index] = null;
+    render();
+};
 
 var render = function render() {
+    var keyNum = app.options.length - 1;
     var template = React.createElement(
         'div',
         null,
@@ -92,7 +101,21 @@ var render = function render() {
         app.options.length > 0 && React.createElement(
             'ul',
             { className: 'ui segments' },
-            app.options
+            app.options.map(function (opti, i) {
+                return opti != null && React.createElement(
+                    'li',
+                    { key: i, className: 'ui segment user-option' },
+                    opti,
+                    ' ',
+                    React.createElement(
+                        'button',
+                        { onClick: function onClick() {
+                                return removeOne(i);
+                            }, className: 'removeOne' },
+                        '[X]'
+                    )
+                );
+            })
         ),
         React.createElement(
             'form',
@@ -102,7 +125,7 @@ var render = function render() {
                 { htmlFor: 'option', className: 'ui label' },
                 'Option:'
             ),
-            React.createElement('input', { type: 'text', name: 'option', 'class': 'ui input option' }),
+            React.createElement('input', { type: 'text', name: 'option', className: 'ui input option' }),
             React.createElement(
                 'button',
                 { type: 'submit', className: 'ui blue button options-button' },

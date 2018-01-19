@@ -17,6 +17,8 @@ let user = {
     location: 'Yew Nork City'
 };
 
+
+
 const getUserLocation = (location) => {
     return (location != null && location != '') ? <p>Location: {location}</p> : undefined;
 }
@@ -37,8 +39,16 @@ const onFormSubmit = (event) => {
     // Holds whatever value was placed inside the element with the name 'option', which is the input field in this case.
     const option = event.target.elements.option.value;
     if (option && option != '') {
-        app.options.push(<li key={`${(app.options.length-1)}`} className="ui segment">{option}</li>);
+        app.options.push(option);
     }
+    // {app.options.map((option) => {
+    //     if (option != RegExp((<li></li>)\W)) {
+    //         option = <li key={`${(app.options.length-1)}`} className="ui segment">{option}</li>
+    //     } else {
+    //         option = option
+    //     }
+    // })}
+
     event.target.elements.option.value = '';
     console.log(app.options);
 
@@ -49,8 +59,13 @@ const clearItems = (event) => {
     app.options = [];
     render();
 }
+const removeOne = (index) => {
+    app.options[index] = null;
+    render();
+}
 
 const render = () => {
+    let keyNum = (app.options.length-1);
     const template = (
         <div>
             <h1 className="head" id="jsx-h1">{app.title}</h1>
@@ -59,12 +74,12 @@ const render = () => {
             <p>{app.options.length > 0 ? `You have ${app.options.length} option${(app.options.length > 1)?'s':''}:` : 'There are no options.'}</p>
                 { app.options.length > 0 &&
                     <ul className="ui segments">
-                        {app.options}
+                        {app.options.map((opti, i) => (opti != null) && <li key={i} className="ui segment user-option">{opti} <button onClick={() => removeOne(i)} className="removeOne">[X]</button></li>)}
                     </ul>
                 }
             <form onSubmit={onFormSubmit} className="ui form add-option">
                 <label htmlFor="option" className="ui label">Option:</label>
-                <input type="text" name="option" class="ui input option" />
+                <input type="text" name="option" className="ui input option" />
                 <button type="submit" className="ui blue button options-button">Add Option</button>
                 <button type="submit" onClick={clearItems} className="ui red button options-button remove">Remove All</button>
             </form>

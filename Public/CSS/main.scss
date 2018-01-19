@@ -1,6 +1,40 @@
+$bg-color: #004262;
+$foreground-primary: #007AB5;
+$foreground-secondary: #005A85;
+$highlight: #D8E6EC;
+
+$main-font:  'Cabin', sans-serif;
+$style-font: 'Macondo', cursive;
+
+head {
+    font-family: $main-font;
+}
+body {
+    background-color: $bg-color;
+    color: $highlight;
+    font-family: $style-font !important;
+}
+
+.user-option {
+    background: $foreground-secondary !important;
+    color: $highlight !important;
+
+    .removeOne {
+        background: $foreground-secondary;
+        color: $highlight;
+        border: 0px;
+
+        float: right;
+    }
+}
+
 .add-option {
     bottom: 1px;
+
     .label {
+        background-color: $foreground-secondary !important;
+        color: $highlight !important;
+
         width: 100%;
         display: block !important;
         margin-top: 5vh !important;
@@ -8,8 +42,13 @@
         border-bottom-right-radius: 0px;
     }
     .option {
+        background-color: $foreground-primary !important;
+        color: $highlight !important;
+
         display: inline-block !important;
-        border-radius: 0px !important;
+        border-top-left-radius: 0px !important;
+        border-top-right-radius: 0px !important;
+        margin-bottom: 5px !important;
     }
 
     .options-button {
