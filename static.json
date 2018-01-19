@@ -1,0 +1,6 @@
+{
+    "root": "Public/",
+    "routes": {
+        "/**": "index.html"
+    }
+}
