@@ -2,10 +2,12 @@
 
 console.log('app.js is running.');
 
+$('.ui.modal').modal('hide');
+
 var appRoot = document.getElementById('react-template-target');
 var userRoot = document.getElementById('user');
 var cntrRoot = document.getElementById('counter');
-var decisionModal = document.getElementById('decision-modal');
+var decision = document.getElementById('decision');
 
 // JSX
 
@@ -65,11 +67,44 @@ var removeOne = function removeOne(index) {
     app.options[index] = null;
     render();
 };
+
+var showDecision = function showDecision(choice) {
+    var decisionModal = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'div',
+            { className: 'content' },
+            React.createElement(
+                'div',
+                { className: 'ui header answer' },
+                React.createElement(
+                    'h1',
+                    { className: 'modal-head' },
+                    choice.toUpperCase()
+                )
+            )
+        ),
+        React.createElement(
+            'div',
+            { className: 'actions' },
+            React.createElement(
+                'div',
+                { className: 'ui positive right labeled icon button thanks' },
+                'Cool!'
+            )
+        )
+    );
+
+    ReactDOM.render(decisionModal, decision);
+};
+
 var makeDecision = function makeDecision() {
     var maxInRange = app.options.length;
     var choice = Math.floor(Math.random() * maxInRange);
     choice = choice < 0 || choice == undefined ? 0 : choice;
-    alert(app.options[choice]);
+    showDecision(app.options[choice]);
+    $('.ui.modal').modal('show');
 };
 
 var render = function render() {

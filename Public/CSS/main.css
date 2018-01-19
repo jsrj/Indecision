@@ -98,6 +98,37 @@ body {
   margin-top: 10px !important;
 }
 
+.answer {
+  margin: 0 auto !important;
+  text-align: center;
+}
+
+.thanks {
+  text-align: center !important;
+  margin: 0 !important;
+  padding: 0.5em !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+.thanks .button {
+  padding-right: 0 !important;
+}
+
+.modal-head {
+  background: #007AB5;
+  color: #D8E6EC;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+#decision {
+  border-radius: 20px;
+  background: #007AB5;
+}
+
 #react-template-target {
   margin: 0 auto;
   width: 50vw;

@@ -1,9 +1,11 @@
 console.log('app.js is running.')
 
-const appRoot       = document.getElementById('react-template-target');
-const userRoot      = document.getElementById('user');
-const cntrRoot      = document.getElementById('counter');
-const decisionModal = document.getElementById('decision-modal');
+$('.ui.modal').modal('hide');
+
+const appRoot    = document.getElementById('react-template-target');
+const userRoot   = document.getElementById('user');
+const cntrRoot   = document.getElementById('counter');
+const decision   = document.getElementById('decision');
 
 // JSX
 
@@ -51,11 +53,30 @@ const removeOne = (index) => {
     app.options[index] = null;
     render();
 }
+
+const showDecision = (choice) => {
+    const decisionModal = (
+        <div>
+
+            <div className="content">
+                <div className="ui header answer"><h1 className="modal-head">{choice.toUpperCase()}</h1></div>
+            </div>
+            <div className="actions">
+                <div className="ui positive right labeled icon button thanks">Cool!</div>
+            </div>
+        </div>
+    );
+
+    ReactDOM.render(decisionModal, decision);
+}
+
+
 const makeDecision = () => {
     let maxInRange = app.options.length;
     let choice = Math.floor(Math.random()*maxInRange);
     choice = (choice < 0 || choice == undefined) ? 0 : choice;
-    alert(app.options[choice]);
+    showDecision(app.options[choice]);
+    $('.ui.modal').modal('show');
 }
 
 const render = () => {

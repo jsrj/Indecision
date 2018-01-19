@@ -107,7 +107,36 @@ body {
     margin-top: 10px !important;
 }
 
+.answer {
+    margin: 0 auto !important;
+    text-align: center;
+}
 
+.thanks {
+    .button {
+        padding-right: 0 !important;
+    }
+
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0.5em !important;
+    display: block !important;
+    border-radius: 20px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+.modal-head {
+    background: $foreground-primary;
+    color: $highlight;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+
+#decision {
+    border-radius: 20px;
+    background: $foreground-primary;
+}
 
 #react-template-target {
     margin: 0 auto;
