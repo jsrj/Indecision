@@ -30,9 +30,6 @@ const getUserName = (uName) => {
 const getFirstName = (fullName) => fullName.split(' ')[0];
 const getLastName  = (fullName) => fullName.split(' ')[1];
 
-console.log(`First Name: ${getFirstName(user.fullName)}, Last Name: ${getLastName(user.fullName)}`);
-
-
 const onFormSubmit = (event) => {
     event.preventDefault();
 
@@ -41,17 +38,7 @@ const onFormSubmit = (event) => {
     if (option && option != '') {
         app.options.push(option);
     }
-    // {app.options.map((option) => {
-    //     if (option != RegExp((<li></li>)\W)) {
-    //         option = <li key={`${(app.options.length-1)}`} className="ui segment">{option}</li>
-    //     } else {
-    //         option = option
-    //     }
-    // })}
-
     event.target.elements.option.value = '';
-    console.log(app.options);
-
     render();
 }
 const clearItems = (event) => {
@@ -64,16 +51,38 @@ const removeOne = (index) => {
     render();
 }
 
+const makeDecision = () => {
+    let maxInRange = app.options.length-1;
+    let minInRange = 0;
+    let choice = Math.floor(Math.random()*(maxInRange-minInRange)+maxInRange);
+    choice = (choice < 0 || choice == undefined) ? 0 : choice;
+    console.log(`choice: ${app.options[choice]}`);
+    //clearItems();
+}
+
 const render = () => {
     let keyNum = (app.options.length-1);
     const template = (
         <div>
-            <h1 className="head" id="jsx-h1">{app.title}</h1>
-            <br />
-            {(app.subtitle) && <span>{app.subtitle}</span>}
-            <p>{app.options.length > 0 ? `You have ${app.options.length} option${(app.options.length > 1)?'s':''}:` : 'There are no options.'}</p>
+            <div className="head-container">
+                <h1 className="head" id="jsx-h1">{app.title} | </h1>{(app.subtitle) && <h3 className="head">{app.subtitle}</h3>}
+            </div>
+
+            <form onSubmit={onFormSubmit} className="ui form add-option">
+                <label htmlFor="option" className="ui label">{app.options.length > 0 ? `You have ${app.options.length} option${(app.options.length > 1)?'s':''}:` : 'Enter an option:'}</label>
+                <input type="text" name="option" className="ui input option" />
+            </form>
+            
+            <div className="buttons-container">
+                <button type="none" click="makeDecision" className="ui button make-decision">What Should I Do?</button>
+                <div className="add-remove-container">
+                    <button type="submit" className="ui blue button options-button">Add Option</button>
+                    <button type="submit" onClick={clearItems} className="ui red button remove">Remove All</button>
+                </div>
+            </div>
+
                 { app.options.length > 0 &&
-                    <ul className="ui segments">
+                    <ul className="ui segments options-list">
                     {
                         app.options.map((opti, i) => (opti != null) &&
                             <li key={i} className="ui segment user-option">
@@ -83,12 +92,6 @@ const render = () => {
                     }
                     </ul>
                 }
-            <form onSubmit={onFormSubmit} className="ui form add-option">
-                <label htmlFor="option" className="ui label">Option:</label>
-                <input type="text" name="option" className="ui input option" />
-                <button type="submit" className="ui blue button options-button">Add Option</button>
-                <button type="submit" onClick={clearItems} className="ui red button options-button remove">Remove All</button>
-            </form>
 
         </div>
     );
@@ -96,13 +99,4 @@ const render = () => {
     ReactDOM.render(template, appRoot);
 }
 
-const userInfo = (
-    <div>
-        {getUserName(user.fullName, 'first')}
-        {(user.age && user.age >= 18) && <p>{user.age}</p>}
-        {getUserLocation(user.location)}
-    </div>
-);
-
-ReactDOM.render(userInfo, userRoot);
 render();

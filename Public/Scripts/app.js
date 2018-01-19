@@ -44,8 +44,6 @@ var getLastName = function getLastName(fullName) {
     return fullName.split(' ')[1];
 };
 
-console.log('First Name: ' + getFirstName(user.fullName) + ', Last Name: ' + getLastName(user.fullName));
-
 var onFormSubmit = function onFormSubmit(event) {
     event.preventDefault();
 
@@ -54,17 +52,7 @@ var onFormSubmit = function onFormSubmit(event) {
     if (option && option != '') {
         app.options.push(option);
     }
-    // {app.options.map((option) => {
-    //     if (option != RegExp((<li></li>)\W)) {
-    //         option = <li key={`${(app.options.length-1)}`} className="ui segment">{option}</li>
-    //     } else {
-    //         option = option
-    //     }
-    // })}
-
     event.target.elements.option.value = '';
-    console.log(app.options);
-
     render();
 };
 var clearItems = function clearItems(event) {
@@ -77,30 +65,71 @@ var removeOne = function removeOne(index) {
     render();
 };
 
+var makeDecision = function makeDecision() {
+    var maxInRange = app.options.length - 1;
+    var minInRange = 0;
+    var choice = Math.floor(Math.random() * (maxInRange - minInRange) + maxInRange);
+    choice = choice < 0 || choice == undefined ? 0 : choice;
+    console.log('choice: ' + app.options[choice]);
+    //clearItems();
+};
+
 var render = function render() {
     var keyNum = app.options.length - 1;
     var template = React.createElement(
         'div',
         null,
         React.createElement(
-            'h1',
-            { className: 'head', id: 'jsx-h1' },
-            app.title
-        ),
-        React.createElement('br', null),
-        app.subtitle && React.createElement(
-            'span',
-            null,
-            app.subtitle
+            'div',
+            { className: 'head-container' },
+            React.createElement(
+                'h1',
+                { className: 'head', id: 'jsx-h1' },
+                app.title,
+                ' | '
+            ),
+            app.subtitle && React.createElement(
+                'h3',
+                { className: 'head' },
+                app.subtitle
+            )
         ),
         React.createElement(
-            'p',
-            null,
-            app.options.length > 0 ? 'You have ' + app.options.length + ' option' + (app.options.length > 1 ? 's' : '') + ':' : 'There are no options.'
+            'form',
+            { onSubmit: onFormSubmit, className: 'ui form add-option' },
+            React.createElement(
+                'label',
+                { htmlFor: 'option', className: 'ui label' },
+                app.options.length > 0 ? 'You have ' + app.options.length + ' option' + (app.options.length > 1 ? 's' : '') + ':' : 'Enter an option:'
+            ),
+            React.createElement('input', { type: 'text', name: 'option', className: 'ui input option' })
+        ),
+        React.createElement(
+            'div',
+            { className: 'buttons-container' },
+            React.createElement(
+                'button',
+                { type: 'none', click: 'makeDecision', className: 'ui button make-decision' },
+                'What Should I Do?'
+            ),
+            React.createElement(
+                'div',
+                { className: 'add-remove-container' },
+                React.createElement(
+                    'button',
+                    { type: 'submit', className: 'ui blue button options-button' },
+                    'Add Option'
+                ),
+                React.createElement(
+                    'button',
+                    { type: 'submit', onClick: clearItems, className: 'ui red button remove' },
+                    'Remove All'
+                )
+            )
         ),
         app.options.length > 0 && React.createElement(
             'ul',
-            { className: 'ui segments' },
+            { className: 'ui segments options-list' },
             app.options.map(function (opti, i) {
                 return opti != null && React.createElement(
                     'li',
@@ -115,43 +144,10 @@ var render = function render() {
                     )
                 );
             })
-        ),
-        React.createElement(
-            'form',
-            { onSubmit: onFormSubmit, className: 'ui form add-option' },
-            React.createElement(
-                'label',
-                { htmlFor: 'option', className: 'ui label' },
-                'Option:'
-            ),
-            React.createElement('input', { type: 'text', name: 'option', className: 'ui input option' }),
-            React.createElement(
-                'button',
-                { type: 'submit', className: 'ui blue button options-button' },
-                'Add Option'
-            ),
-            React.createElement(
-                'button',
-                { type: 'submit', onClick: clearItems, className: 'ui red button options-button remove' },
-                'Remove All'
-            )
         )
     );
 
     ReactDOM.render(template, appRoot);
 };
 
-var userInfo = React.createElement(
-    'div',
-    null,
-    getUserName(user.fullName, 'first'),
-    user.age && user.age >= 18 && React.createElement(
-        'p',
-        null,
-        user.age
-    ),
-    getUserLocation(user.location)
-);
-
-ReactDOM.render(userInfo, userRoot);
 render();

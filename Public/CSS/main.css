@@ -6,6 +6,17 @@ body {
   background-color: #004262;
   color: #D8E6EC;
   font-family: "Macondo", cursive !important;
+  padding-top: 12px !important;
+}
+
+.head {
+  display: inline;
+  text-align: center;
+}
+
+.head-container {
+  text-align: center;
+  margin: 0 auto;
 }
 
 .user-option {
@@ -45,17 +56,46 @@ body {
   margin-bottom: 5px !important;
 }
 
-.add-option .options-button {
-  height: 6vh;
-  display: inline-block;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+.buttons-container {
+  display: block;
+  margin-bottom: 10px;
+  height: 8vh;
 }
 
-.add-option .remove {
+.buttons-container .make-decision {
+  display: flex;
+  float: left;
+}
+
+.buttons-container .add-remove-container {
+  display: flex;
+  flex-direction: row;
+  float: right;
+}
+
+.buttons-container .add-remove-container .options-button {
+  display: inline-block;
+  margin: 0px;
+  background: #007AB5;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 1px solid #D8E6EC;
+}
+
+.buttons-container .add-remove-container .remove {
+  clear: both;
   position: relative !important;
   float: right !important;
   margin: 0px;
+  background: #FF5733;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left: 1px solid #D8E6EC;
+}
+
+.options-list {
+  clear: both;
+  margin-top: 10px !important;
 }
 
 #react-template-target {
