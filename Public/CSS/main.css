@@ -15,8 +15,10 @@ body {
 
 .user-option .removeOne {
   background: #005A85;
-  color: #D8E6EC;
+  color: #FF5733;
   border: 0px;
+  text-align: center !important;
+  padding: 5px;
   float: right;
 }
 

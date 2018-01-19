@@ -74,7 +74,13 @@ const render = () => {
             <p>{app.options.length > 0 ? `You have ${app.options.length} option${(app.options.length > 1)?'s':''}:` : 'There are no options.'}</p>
                 { app.options.length > 0 &&
                     <ul className="ui segments">
-                        {app.options.map((opti, i) => (opti != null) && <li key={i} className="ui segment user-option">{opti} <button onClick={() => removeOne(i)} className="removeOne">[X]</button></li>)}
+                    {
+                        app.options.map((opti, i) => (opti != null) &&
+                            <li key={i} className="ui segment user-option">
+                                {opti}
+                                <button onClick={() => removeOne(i)} className="removeOne"> X </button>
+                            </li>)
+                    }
                     </ul>
                 }
             <form onSubmit={onFormSubmit} className="ui form add-option">

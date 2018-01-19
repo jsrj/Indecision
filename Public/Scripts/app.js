@@ -106,13 +106,12 @@ var render = function render() {
                     'li',
                     { key: i, className: 'ui segment user-option' },
                     opti,
-                    ' ',
                     React.createElement(
                         'button',
                         { onClick: function onClick() {
                                 return removeOne(i);
                             }, className: 'removeOne' },
-                        '[X]'
+                        ' X '
                     )
                 );
             })

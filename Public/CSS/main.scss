@@ -2,6 +2,7 @@ $bg-color: #004262;
 $foreground-primary: #007AB5;
 $foreground-secondary: #005A85;
 $highlight: #D8E6EC;
+$remove: #FF5733;
 
 $main-font:  'Cabin', sans-serif;
 $style-font: 'Macondo', cursive;
@@ -21,9 +22,11 @@ body {
 
     .removeOne {
         background: $foreground-secondary;
-        color: $highlight;
+        color: $remove;
         border: 0px;
 
+        text-align: center !important;
+        padding: 5px;
         float: right;
     }
 }
