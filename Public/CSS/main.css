@@ -9,6 +9,10 @@ body {
   padding-top: 12px !important;
 }
 
+#jsx-h1 {
+  color: #3E92A3 !important;
+}
+
 .head {
   display: inline;
   text-align: center;
