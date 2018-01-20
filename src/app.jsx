@@ -8,6 +8,14 @@ const cntrRoot   = document.getElementById('counter');
 const decision   = document.getElementById('decision');
 
 // JSX
+let responses = [
+    "cool!",
+    "right on, dude!",
+    "I'll do it!",
+    "okay. But I don't wanna.",
+    "Yas!",
+    "Thanks!"
+];
 
 let app = {
     title:    'Indecision',
@@ -62,7 +70,7 @@ const showDecision = (choice) => {
                 <div className="ui header answer"><h1 className="modal-head">{choice.toUpperCase()}</h1></div>
             </div>
             <div className="actions">
-                <div className="ui positive right labeled icon button thanks">Cool!</div>
+                <div className="ui positive right labeled icon button thanks">{responses[Math.floor(Math.random()*responses.length)]}</div>
             </div>
         </div>
     );

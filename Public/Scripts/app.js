@@ -10,6 +10,7 @@ var cntrRoot = document.getElementById('counter');
 var decision = document.getElementById('decision');
 
 // JSX
+var responses = ["cool!", "right on, dude!", "I'll do it!", "okay. But I don't wanna.", "Yas!", "Thanks!"];
 
 var app = {
     title: 'Indecision',
@@ -91,7 +92,7 @@ var showDecision = function showDecision(choice) {
             React.createElement(
                 'div',
                 { className: 'ui positive right labeled icon button thanks' },
-                'Cool!'
+                responses[Math.floor(Math.random() * responses.length)]
             )
         )
     );
