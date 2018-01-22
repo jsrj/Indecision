@@ -7,14 +7,21 @@
   "author": "Robert Jones (jsrj)",
   "license": "MIT",
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.1.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1"
   },
-  "scripts" : {
+  "scripts": {
     "compile-jsx": "babel src/app.jsx --out-file=Public/Scripts/app.js --presets=env,react --watch",
-    "live" :      "live-server 8080 public",
+    "live": "live-server 8080 public",
     "start": "http-server Public/",
-    "push":  "git push origin master -f && git push heroku master",
-    "build": ""
+    "push": "git push origin master -f && git push heroku master",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "jest": "^22.1.4",
+    "puppeteer": "^1.0.0"
   }
 }
