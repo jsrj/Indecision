@@ -136,7 +136,7 @@ var render = function render() {
                 { htmlFor: 'option', className: 'ui label' },
                 app.options.length > 0 ? 'You have ' + app.options.length + ' option' + (app.options.length > 1 ? 's' : '') + ':' : 'Enter an option:'
             ),
-            React.createElement('input', { type: 'text', name: 'option', className: 'ui input option' })
+            React.createElement('input', { type: 'text', name: 'option', className: 'ui input option', id: 'choice-input' })
         ),
         React.createElement(
             'div',
@@ -167,7 +167,7 @@ var render = function render() {
             app.options.map(function (opti, i) {
                 return opti != null && React.createElement(
                     'li',
-                    { key: i, className: 'ui segment user-option' },
+                    { key: i, className: 'ui segment user-option', id: 'choice' + i },
                     opti,
                     React.createElement(
                         'button',
