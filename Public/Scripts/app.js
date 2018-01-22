@@ -143,7 +143,7 @@ var render = function render() {
             { className: 'buttons-container' },
             React.createElement(
                 'button',
-                { type: 'none', onClick: makeDecision, className: 'ui button make-decision' },
+                { type: 'none', onClick: makeDecision, className: 'ui button make-decision', disabled: app.options.length == 0 && disabled },
                 'What Should I Do?'
             ),
             React.createElement(

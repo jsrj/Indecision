@@ -101,7 +101,7 @@ const render = () => {
             </form>
 
             <div className="buttons-container">
-                <button type="none" onClick={makeDecision} className="ui button make-decision">What Should I Do?</button>
+                <button type="none" onClick={makeDecision} className="ui button make-decision" disabled={(app.options.length == 0) && disabled}>What Should I Do?</button>
                 <div className="add-remove-container">
                     <button type="submit" className="ui blue button options-button">Add Option</button>
                     <button type="submit" onClick={clearItems} className="ui red button remove">Remove All</button>
