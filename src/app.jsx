@@ -97,7 +97,7 @@ const render = () => {
 
             <form onSubmit={onFormSubmit} className="ui form add-option">
                 <label htmlFor="option" className="ui label">{app.options.length > 0 ? `You have ${app.options.length} option${(app.options.length > 1)?'s':''}:` : 'Enter an option:'}</label>
-                <input type="text" name="option" className="ui input option" />
+                <input type="text" name="option" className="ui input option" id="choice-input" />
             </form>
 
             <div className="buttons-container">
@@ -112,7 +112,7 @@ const render = () => {
                     <ul className="ui segments options-list">
                     {
                         app.options.map((opti, i) => (opti != null) &&
-                            <li key={i} className="ui segment user-option">
+                            <li key={i} className="ui segment user-option" id={`choice${i}`}>
                                 {opti}
                                 <button onClick={() => removeOne(i)} className="removeOne"> X </button>
                             </li>)
